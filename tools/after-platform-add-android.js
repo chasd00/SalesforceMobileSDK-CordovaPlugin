@@ -16,9 +16,8 @@ var fixAndroidManifest = function(data) {
         var applicationTag = '<application android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name" android:manageSpaceActivity="com.salesforce.androidsdk.ui.ManageSpaceActivity" android:name="' + appName + '">'
         data = data.replace(/<application [^>]*>/, applicationTag);
         
-        // Comment out first activity
-        data = data.replace(/<activity/, "<!--<activity");
-        data = data.replace(/<\/activity>/, "</activity>-->");
+        // remove com.adobe.phonegap.push.PushHandlerActivity Activity
+        data = data.replace(/<activity.*com.adobe.phonegap.push.PushHandlerActivity.*\/>/, "");
         
         // Change min sdk version
         data = data.replace(/android\:minSdkVersion\=\"10\"/, 'android:minSdkVersion="19"');
