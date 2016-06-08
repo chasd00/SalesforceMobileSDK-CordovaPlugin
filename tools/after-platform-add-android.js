@@ -4,6 +4,7 @@
 var fs = require('fs');
 var path = require('path');
 var targetAndroidApi = 23;
+var minAndroidApi = 19;
 
 // Function to fix AndroidManifest.xml
 var fixAndroidManifest = function(data) {
@@ -20,10 +21,10 @@ var fixAndroidManifest = function(data) {
         data = data.replace(/<activity.*com.adobe.phonegap.push.PushHandlerActivity.*\/>/, "");
         
         // Change min sdk version
-        data = data.replace(/android\:minSdkVersion\=\"10\"/, 'android:minSdkVersion="19"');
+        data = data.replace(/android\:minSdkVersion\=\"\d+\"/, 'android:minSdkVersion="' + minAndroidApi + '"');
         
         // Change target api
-        data = data.replace(/android\:targetSdkVersion\=\"22\"/, 'android:targetSdkVersion="' + targetAndroidApi + '"');
+        data = data.replace(/android\:targetSdkVersion\=\"\d+\"/, 'android:targetSdkVersion="' + targetAndroidApi + '"');
         
         console.log('Fixed AndroidManifest.xml');
     } else {
